@@ -30,13 +30,15 @@ int main(int argc, char *argv[]) {
 
     // Print the source address
     printf("Listening on %s:%d\n", HOSTNAME, PORT);
-    char buffer[1024];
-
+    
     // Bind the socket to the address and port (127.0.0.1/12345)
     bind(sockfd, (const struct sockaddr *)&srcaddr, sizeof(srcaddr));
-
+    
+    // Print the header for recieved messages
     printf("\ni\tbytes\tmessage\n");
-
+    
+    // Recieve message into the buffer
+    char buffer[1024];
     for (int i = 0; 1; i ++) {
         // Receive and print the message from the sender
         int res = recvfrom(sockfd, buffer, sizeof(buffer), 0, NULL, NULL);

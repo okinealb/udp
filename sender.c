@@ -32,6 +32,9 @@ int main(int argc, char *argv[]) {
         .sin_addr.s_addr = inet_addr(HOSTNAME)
     };
 
+    // Print the destination address
+    printf("Sending to %s:%d\n", HOSTNAME, PORT);
+
     // Print the header for sent messages
     printf("\ni\tbytes\tmessage\n");
 
