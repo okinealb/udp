@@ -4,7 +4,7 @@
 
 # Binary and source directories
 BIN_DIR = bin
-SRC_DIR = .
+SRC_DIR = src
 
 # Create the binary directory if it doesn't exist
 ${BIN_DIR}:
