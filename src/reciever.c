@@ -41,8 +41,8 @@ int main(int argc, char *argv[]) {
     char buffer[1024];
     for (int i = 0; 1; i ++) {
         // Receive and print the message from the sender
-        int res = recvfrom(sockfd, buffer, sizeof(buffer), 0, NULL, NULL);
-        printf("%d\t%d\t%s\n", i, res, buffer);
+        int bytes = recvfrom(sockfd, buffer, sizeof(buffer), 0, NULL, NULL);
+        printf("%d\t%d\t%s\n", i, bytes, buffer);
     }
 
     // Close the socket

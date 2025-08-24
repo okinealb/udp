@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -38,26 +37,24 @@ int main(int argc, char *argv[]) {
     // Print the header for sent messages
     printf("\ni\tbytes\tmessage\n");
 
-    bind(sockfd, (const struct sockaddr *)&destaddr, sizeof(destaddr));
-
     // Create and send multiple messages
     char sockmessage[1024];
     for (int i = 0; i < 10; i ++) {
         
         // Format the message to include the iteration number
-        sprintf(sockmessage, "%s %d", message, i + 1);
+        int n = snprintf(sockmessage, sizeof(sockmessage), "%s %d", message, i + 1);
 
         // Send the message to the receiver
-        int res = sendto(
+        int bytes = sendto(
             sockfd, 
             sockmessage,
-            strlen(sockmessage) + 1,
+            (size_t) n,
             0, 
             (const struct sockaddr *) &destaddr,
             sizeof(destaddr)
         );
         // Print confirmation of sent message
-        printf("%d\t%d\t%s\n", i, res, sockmessage);
+        printf("%d\t%d\t%s\n", i, bytes, sockmessage);
     }
 
     // Close the socket
